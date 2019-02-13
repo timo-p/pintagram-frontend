@@ -2,18 +2,32 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <router-link to="/login">Login</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link> |
+      <router-link to="/create-post">Create post</router-link> |
+      <router-link to="/feed">Feed</router-link> |
+      <a @click="logout()">Logout</a>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-export default {}
+export default {
+  methods: {
+    ...mapMutations(['setUser']),
+    logout () {
+      localStorage.removeItem('pintagram-jwt-token')
+      this.setUser({})
+      this.$router.push('/')
+    }
+  }
+}
 </script>
 
 <style>

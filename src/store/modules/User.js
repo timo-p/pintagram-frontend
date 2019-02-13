@@ -1,5 +1,5 @@
 const state = {
-  user: undefined
+  user: {}
 }
 
 const getters = {

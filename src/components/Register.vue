@@ -9,7 +9,7 @@
         <tbody>
           <tr>
             <td>Username</td>
-            <td>{{ username }}</td>
+            <td>{{ user.username }}</td>
           </tr>
           <tr>
             <td>Password</td>
@@ -17,11 +17,11 @@
           </tr>
           <tr>
             <td>First name</td>
-            <td>{{ firstName }}</td>
+            <td>{{ user.first_name }}</td>
           </tr>
           <tr>
             <td>Last name</td>
-            <td>{{ lastName }}</td>
+            <td>{{ user.last_name }}</td>
           </tr>
         </tbody>
       </table>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import { register } from '../api/user'
 export default {
   name: 'Register',
@@ -40,21 +40,18 @@ export default {
     username: '',
     password: ''
   }),
+  computed: {
+    ...mapGetters({
+      user: 'getUser'
+    })
+  },
   methods: {
     ...mapMutations(['setUser']),
     register () {
       register()
-        .then((data) => {
-          this.setUser({
-            firstName: data.data.first_name,
-            lastName: data.data.last_name,
-            username: data.data.username
-          })
-          this.firstName = data.data.first_name
-          this.lastName = data.data.last_name
-          this.username = data.data.username
-          this.password = data.data.password
-          localStorage.setItem('pintagram-session-id', data.data.session_id)
+        .then((response) => {
+          this.setUser(response.data)
+          this.password = response.data.password
         })
     }
   }

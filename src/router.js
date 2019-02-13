@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import CreatePost from './components/CreatePost.vue'
+import Feed from './components/Feed.vue'
 
 Vue.use(Router)
 
@@ -22,6 +24,16 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/create-post',
+      name: 'createPost',
+      component: CreatePost
+    },
+    {
+      path: '/feed',
+      name: 'Feed',
+      component: Feed
     },
     {
       path: '/about',

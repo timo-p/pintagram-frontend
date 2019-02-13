@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import { register } from '../api/user'
+import { mapMutations } from 'vuex'
+import { login } from '../api/user'
 export default {
   name: 'Login',
   data: () => ({
@@ -24,9 +25,12 @@ export default {
     password: ''
   }),
   methods: {
+    ...mapMutations(['setUser']),
     login () {
-      // login(this.username, this.password)
-      register()
+      login(this.username, this.password)
+        .then((response) => {
+          this.setUser(response.data)
+        })
     }
   }
 }

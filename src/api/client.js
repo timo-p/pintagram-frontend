@@ -19,6 +19,7 @@ client.interceptors.response.use(function (response) {
   if (response.headers['x-jwt-token']) {
     localStorage.setItem('pintagram-jwt-token', response.headers['x-jwt-token'])
   }
+  return response
 }, function (error) {
   // Do something with response error
   return Promise.reject(error)
