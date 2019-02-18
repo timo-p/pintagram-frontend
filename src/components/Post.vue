@@ -1,11 +1,20 @@
 <template>
-  <div>
-    <span>{{ post.message }}</span>
-    <a v-if="isOwnPost" @click="deleteThisPost()">Delete</a>
+  <div class="card">
+    <div class="card-header">
+      <span class="font-weight-bolder">{{ post.username }}</span>
+      &nbsp;
+      <span class="font-weight-light">{{ time }} ago</span>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ post.message }}</p>
+      <button class="btn btn-danger" v-if="isOwnPost" @click="deleteThisPost()">Delete</button>
+
+    </div>
   </div>
 </template>
 
 <script>
+import { distanceInWords } from 'date-fns'
 import { mapMutations, mapGetters } from 'vuex'
 import { deletePost } from '../api/user'
 export default {
@@ -24,6 +33,9 @@ export default {
     }),
     isOwnPost () {
       return this.post.username === this.user.username
+    },
+    time () {
+      return distanceInWords(new Date(this.post.created_at), new Date())
     }
   }
 }

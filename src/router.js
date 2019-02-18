@@ -6,6 +6,7 @@ import Register from './components/Register.vue'
 import CreatePost from './components/CreatePost.vue'
 import Feed from './components/Feed.vue'
 import TopUsers from './components/TopUsers.vue'
+import Timeline from './components/Timeline.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/top-users',
       name: 'TopUsers',
       component: TopUsers
+    },
+    {
+      path: '/timeline',
+      name: 'Timeline',
+      component: Timeline
     },
     {
       path: '/about',

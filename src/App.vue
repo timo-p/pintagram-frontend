@@ -7,10 +7,21 @@
       <router-link to="/register">Register</router-link> |
       <router-link to="/create-post">Create post</router-link> |
       <router-link to="/top-users">Top users</router-link> |
+      <router-link to="/timeline">Timeline</router-link> |
       <router-link to="/feed">Feed</router-link> |
       <a @click="logout()">Logout</a>
     </div>
-    <router-view/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+          <router-view/>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

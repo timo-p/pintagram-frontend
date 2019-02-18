@@ -17,3 +17,5 @@ export const getTopUsers = () => client.get('users')
 export const follow = (body) => client.post('follow', body)
 
 export const getFollowings = () => client.get('followings')
+
+export const getTimeline = () => client.get('timeline')
