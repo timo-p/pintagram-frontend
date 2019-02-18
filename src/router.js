@@ -5,6 +5,7 @@ import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import CreatePost from './components/CreatePost.vue'
 import Feed from './components/Feed.vue'
+import TopUsers from './components/TopUsers.vue'
 
 Vue.use(Router)
 
@@ -31,9 +32,15 @@ export default new Router({
       component: CreatePost
     },
     {
-      path: '/feed',
-      name: 'Feed',
-      component: Feed
+      path: '/feed/:username',
+      name: 'feed',
+      component: Feed,
+      props: true
+    },
+    {
+      path: '/top-users',
+      name: 'TopUsers',
+      component: TopUsers
     },
     {
       path: '/about',

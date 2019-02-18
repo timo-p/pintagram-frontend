@@ -6,6 +6,7 @@
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link> |
       <router-link to="/create-post">Create post</router-link> |
+      <router-link to="/top-users">Top users</router-link> |
       <router-link to="/feed">Feed</router-link> |
       <a @click="logout()">Logout</a>
     </div>

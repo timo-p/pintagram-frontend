@@ -9,7 +9,11 @@ Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
 
-getUser().then(() => {
+getUser().then((response) => {
+  if (response) {
+    store.commit('setUser', response.data)
+    store.dispatch('getFollowings', response.data.username)
+  }
   new Vue({
     router,
     store,

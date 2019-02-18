@@ -11,3 +11,9 @@ export const createPost = (post) => client.post('posts', post)
 export const getPosts = (username) => client.get(`users/${username}/posts`)
 
 export const deletePost = (id) => client.delete(`posts/${id}`)
+
+export const getTopUsers = () => client.get('users')
+
+export const follow = (body) => client.post('follow', body)
+
+export const getFollowings = () => client.get('followings')

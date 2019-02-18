@@ -5,26 +5,21 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
-import { getPosts } from '../api/user'
+import { mapGetters, mapActions } from 'vuex'
 import Post from './Post'
 export default {
   name: 'Feed',
+  props: ['username'],
   components: { Post },
-  data: () => ({
-    message: ''
-  }),
   created () {
-    getPosts(this.user.username)
-      .then((response) => this.setPosts(response.data))
+    this.loadPosts(this.username)
   },
   methods: {
-    ...mapMutations(['setPosts'])
+    ...mapActions(['loadPosts'])
   },
   computed: {
     ...mapGetters({
-      posts: 'getPosts',
-      user: 'getUser'
+      posts: 'getPosts'
     })
   }
 }
