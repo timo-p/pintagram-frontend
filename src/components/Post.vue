@@ -8,7 +8,6 @@
     <div class="card-body">
       <p class="card-text">{{ post.message }}</p>
       <button class="btn btn-danger" v-if="isOwnPost" @click="deleteThisPost()">Delete</button>
-
     </div>
   </div>
 </template>
@@ -40,3 +39,16 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .card {
+    transition: opacity .5s;
+  }
+
+  .v-leave-active {
+    opacity: 0;
+  }
+
+  .v-enter, .v-leate-to {
+    opacity: 0;
+  }
+</style>

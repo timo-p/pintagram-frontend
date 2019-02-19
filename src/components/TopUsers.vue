@@ -4,6 +4,7 @@
       <li v-for="user in users" :key="user.id">
         <router-link :to="{ name: 'feed', params: { username: user.username }}">{{ user.username }}</router-link>
         <a v-if="canFollow(user.username)" @click="follow(user.username)">Follow</a>
+        <a v-if="canUnfollow(user.username)" @click="unfollow(user.username)">Unfollow</a>
       </li>
     </ul>
   </div>
@@ -18,9 +19,12 @@ export default {
     this.loadUsers()
   },
   methods: {
-    ...mapActions(['loadUsers', 'follow']),
+    ...mapActions(['loadUsers', 'follow', 'unfollow']),
     canFollow (username) {
       return this.user.username !== username && !this.followingUsernames.includes(username)
+    },
+    canUnfollow (username) {
+      return this.user.username !== username && this.followingUsernames.includes(username)
     }
   },
   computed: {

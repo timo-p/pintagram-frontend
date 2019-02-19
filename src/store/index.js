@@ -5,6 +5,7 @@ import feed from './modules/Feed'
 import users from './modules/Users'
 import followings from './modules/Followings'
 import timeline from './modules/Timeline'
+import lines from './modules/Lines'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     feed,
     users,
     followings,
-    timeline
+    timeline,
+    lines
   },
   strict: debug
 })

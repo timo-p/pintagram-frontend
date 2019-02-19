@@ -1,4 +1,4 @@
-import { getFollowings, follow } from '../../api/user'
+import { getFollowings, follow, unfollow } from '../../api/user'
 
 const state = {
   followings: []
@@ -22,6 +22,9 @@ const mutations = {
     if (!exists) {
       state.followings.push(following)
     }
+  },
+  removeFollowing (state, username) {
+    state.followings = state.followings.filter((f) => f.following !== username)
   }
 }
 
@@ -32,10 +35,16 @@ const actions = {
         commit('setFollowings', response.data)
       })
   },
-  follow ({ commit }, username, following) {
+  follow ({ commit }, username) {
     follow({ follow: username })
       .then((response) => {
         commit('addFollowing', response.data)
+      })
+  },
+  unfollow ({ commit }, username) {
+    unfollow({ follow: username })
+      .then(() => {
+        commit('removeFollowing', username)
       })
   }
 }
