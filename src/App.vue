@@ -1,18 +1,20 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="sm" variant="light">
+    <b-navbar :sticky="true" toggleable="sm" variant="light">
       <b-navbar-toggle target="nav_collapse" />
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
           <router-link class="nav-item nav-link" to="/">Home</router-link>
-          <router-link class="nav-item nav-link" to="/about">About</router-link>
-          <router-link class="nav-item nav-link" to="/login">Login</router-link>
-          <router-link class="nav-item nav-link" to="/register">Register</router-link>
-          <router-link class="nav-item nav-link" to="/create-post">Create post</router-link>
           <router-link class="nav-item nav-link" to="/top-users">Top users</router-link>
-          <router-link class="nav-item nav-link" to="/timeline">Timeline</router-link>
-          <router-link class="nav-item nav-link" to="/feed">Feed</router-link>
-          <a class="nav-item nav-link" @click="logout()">Logout</a>
+          <router-link v-if="!user.username" class="nav-item nav-link" to="/register">Register</router-link>
+          <b-nav-item-dropdown right v-if="!user.username">
+            <template slot="button-content"><em>Login</em></template>
+            <Login></Login>
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown right v-else>
+            <template slot="button-content"><em>{{ user.first_name }} {{ user.last_name }}</em></template>
+            <b-dropdown-item href="#" @click="logout()">Logout</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -34,18 +36,26 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Login from './components/Login'
 
 export default {
+  components: { Login },
   methods: {
-    ...mapMutations(['setUser']),
+    ...mapMutations(['setUser', 'setFollowings']),
     logout () {
       localStorage.removeItem('pintagram-jwt-token')
       this.setUser({})
+      this.setFollowings([])
       this.$router.push('/')
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'getUser'
+    })
   }
 }
 </script>

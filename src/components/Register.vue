@@ -4,7 +4,7 @@
     <p>To register all you have to do is click the button below.</p>
     <p>We'll generate a username and password for you.</p>
     <b-button @click="register" v-if="!user.username" v-bind:disabled="isRegistering" variant="primary">Register!</b-button>
-    <p v-if="this.password">
+    <div v-if="this.password">
       <b-card>
         <table>
           <tbody>
@@ -27,7 +27,11 @@
           </tbody>
         </table>
       </b-card>
-    </p>
+      <p>You better remember your password if you want to login again, because there is no password recovery yet :)</p>
+      <p>
+        Go to your <router-link to="/">front page</router-link> to start posting. Or <router-link to="/top-users">find other users</router-link> to follow.
+      </p>
+    </div>
   </div>
 </template>
 
@@ -58,3 +62,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+table {
+  width: 100%;
+}
+</style>

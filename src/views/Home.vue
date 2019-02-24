@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Harold Pinter" src="../assets/pinter.jpg">
+    <h1>Welcome to Pintagram beta</h1>
+    <p>The only social media that only lets you post using quotes from Harold Pinter poems!</p>
+    <p><router-link to="/register">Register</router-link> to get started.</p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
+  name: 'home'
 }
 </script>
+
+<style scoped>
+img {
+  width: 100%;
+}
+</style>

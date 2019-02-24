@@ -4,6 +4,7 @@
       <b-form-group>
         <div class="input-group mb-3">
           <cool-select
+            placeholder="What's on your mind?"
             v-model="message"
             :items="lines"
             :loading="isPosting"
@@ -52,3 +53,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.IZ-select {
+  width: 430px;
+}
+</style>

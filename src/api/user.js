@@ -12,7 +12,15 @@ export const getPosts = (username) => client.get(`users/${username}/posts`)
 
 export const deletePost = (id) => client.delete(`posts/${id}`)
 
-export const getTopUsers = () => client.get('users')
+export const getTopUsers = (lastUsername) => {
+  const config = {
+    params: {}
+  }
+  if (lastUsername) {
+    config.params.users_before = lastUsername
+  }
+  return client.get('users', config)
+}
 
 export const follow = (body) => client.post('follow', body)
 

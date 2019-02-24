@@ -13,6 +13,10 @@ const getters = {
 const mutations = {
   setUsers (state, users) {
     state.users = users
+  },
+  addUsers (state, users) {
+    const newUsers = [].concat(state.users).concat(users)
+    state.users = newUsers
   }
 }
 

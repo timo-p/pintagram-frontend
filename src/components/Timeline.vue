@@ -6,9 +6,11 @@
     <transition-group>
       <Post v-for="post in posts" :key="post.id" v-bind:post="post"></Post>
     </transition-group>
-    <infinite-loading @infinite="loadMore"></infinite-loading>
+    <infinite-loading @infinite="loadMore">
+      <div slot="no-results"></div>
+    </infinite-loading>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -24,9 +26,6 @@ export default {
   data: () => ({
     isLoading: false
   }),
-  created () {
-    // this.loadTimeline()
-  },
   destroyed () {
     this.setTimeline([])
   },
@@ -39,7 +38,7 @@ export default {
         .then((response) => {
           this.addPostsToTimeline(response.data)
           if (response.data.length) {
-            setTimeout(() => $state.loaded(), 1000)
+            $state.loaded()
           } else {
             $state.complete()
           }
