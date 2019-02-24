@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="font-weight-bolder">{{ post.username }}</span>
+      <span class="font-weight-bolder">{{ post.first_name }} {{ post.last_name }}</span>
       &nbsp;
       <span class="font-weight-light">{{ time }} ago</span>
     </div>

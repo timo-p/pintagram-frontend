@@ -17,8 +17,11 @@ const mutations = {
   setTimeline (state, timeline) {
     state.timeline = timeline
   },
-  addPostToTimeline (state, post) {
-    const timeline = state.timeline.concat(post)
+  addPostsToTimeline (state, posts) {
+    posts = [].concat(posts)
+    const existing = state.timeline.map((p) => p.id)
+    const newPosts = posts.filter((p) => !existing.includes(p.id))
+    const timeline = state.timeline.concat(newPosts)
     sortTimeline(timeline)
     state.timeline = timeline
   },
@@ -28,8 +31,8 @@ const mutations = {
 }
 
 const actions = {
-  loadTimeline ({ commit }, username) {
-    getTimeline(username)
+  loadTimeline ({ commit }) {
+    getTimeline()
       .then((response) => {
         const timeline = response.data
         sortTimeline(timeline)

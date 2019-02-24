@@ -5,6 +5,7 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import VueSelect from 'vue-cool-select'
 import { getUser } from './api/user'
+import infiniteScroll from 'vue-infinite-scroll'
 
 Vue.config.productionTip = false
 
@@ -12,6 +13,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueSelect, {
   theme: 'bootstrap' // or 'material-design'
 })
+Vue.use(infiniteScroll)
 
 getUser().then((response) => {
   if (response) {

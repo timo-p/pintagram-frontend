@@ -20,6 +20,13 @@ export const unfollow = (body) => client.post('unfollow', body)
 
 export const getFollowings = () => client.get('followings')
 
-export const getTimeline = () => client.get('timeline')
-
+export const getTimeline = (lastPostId) => {
+  const config = {
+    params: {}
+  }
+  if (lastPostId) {
+    config.params.posts_before = lastPostId
+  }
+  return client.get('timeline', config)
+}
 export const getLines = () => client.get('lines')

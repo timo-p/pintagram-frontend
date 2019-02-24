@@ -31,14 +31,14 @@ export default {
     isPosting: false
   }),
   methods: {
-    ...mapMutations(['addPostToTimeline']),
+    ...mapMutations(['addPostsToTimeline']),
     post () {
       this.isPosting = true
       createPost({ message: this.message })
         .then((response) => {
           this.isPosting = false
           this.message = ''
-          this.addPostToTimeline(response.data)
+          this.addPostsToTimeline(response.data)
         })
     }
   },
