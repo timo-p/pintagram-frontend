@@ -8,7 +8,15 @@ export const getUser = () => client.get('user').catch(() => null)
 
 export const createPost = (post) => client.post('posts', post)
 
-export const getPosts = (username) => client.get(`users/${username}/posts`)
+export const getPosts = (username, lastPostId) => {
+  const config = {
+    params: {}
+  }
+  if (lastPostId) {
+    config.params.posts_before = lastPostId
+  }
+  return client.get(`users/${username}/posts`, config)
+}
 
 export const deletePost = (id) => client.delete(`posts/${id}`)
 
@@ -21,6 +29,8 @@ export const getTopUsers = (lastUsername) => {
   }
   return client.get('users', config)
 }
+
+export const getUserByUsername = (username) => client.get(`users/${username}`)
 
 export const follow = (body) => client.post('follow', body)
 

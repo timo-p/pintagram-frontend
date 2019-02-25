@@ -1,26 +1,60 @@
 <template>
-  <div>
+<div>
+  <h1>{{ user.first_name }} {{user.last_name}}</h1>
+  <p><FollowButton :username="user.username"/></p>
+  <transition-group>
     <Post v-for="post in posts" :key="post.id" v-bind:post="post"></Post>
-  </div>
+  </transition-group>
+  <infinite-loading @infinite="loadMore">
+    <div slot="no-results"><em>No posts</em></div>
+  </infinite-loading>
+</div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+import InfiniteLoading from 'vue-infinite-loading'
 import Post from './Post'
+import FollowButton from './FollowButton'
+import { getPosts } from '../api/user'
+
 export default {
   name: 'Feed',
   props: ['username'],
-  components: { Post },
+  components: { Post, InfiniteLoading, FollowButton },
+  data: () => ({
+    isLoading: false
+  }),
+  destroyed () {
+    this.setTimeline([])
+  },
   created () {
-    this.loadPosts(this.username)
+    this.loadUserIfMissing(this.username)
   },
   methods: {
-    ...mapActions(['loadPosts'])
+    ...mapActions(['loadTimeline', 'loadMoreOfTimeline', 'loadUserIfMissing']),
+    ...mapMutations(['addPostsToTimeline', 'setTimeline']),
+    loadMore ($state) {
+      const lastPostId = this.posts.length ? this.posts[this.posts.length - 1].id : null
+      getPosts(this.username, lastPostId)
+        .then((response) => {
+          this.addPostsToTimeline(response.data)
+          if (response.data.length) {
+            $state.loaded()
+          } else {
+            $state.complete()
+          }
+        })
+    }
   },
   computed: {
     ...mapGetters({
-      posts: 'getPosts'
-    })
+      posts: 'getTimeline',
+      users: 'getUsers'
+    }),
+    user () {
+      return this.users.find((u) => u.username === this.username)
+    }
   }
 }
 </script>
