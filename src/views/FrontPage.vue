@@ -7,8 +7,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Timeline from './Timeline'
-import Home from '../views/Home'
+import Timeline from '../components/Timeline'
+import Home from './Home'
 
 export default {
   components: { Timeline, Home },

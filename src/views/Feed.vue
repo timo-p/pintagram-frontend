@@ -14,9 +14,9 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
-import Post from './Post'
-import FollowButton from './FollowButton'
-import { getPosts } from '../api/user'
+import Post from '../components/Post'
+import FollowButton from '../components/FollowButton'
+import { getPosts } from '../api'
 
 export default {
   name: 'Feed',
@@ -32,7 +32,7 @@ export default {
     this.loadUserIfMissing(this.username)
   },
   methods: {
-    ...mapActions(['loadTimeline', 'loadMoreOfTimeline', 'loadUserIfMissing']),
+    ...mapActions(['loadUserIfMissing']),
     ...mapMutations(['addPostsToTimeline', 'setTimeline']),
     loadMore ($state) {
       const lastPostId = this.posts.length ? this.posts[this.posts.length - 1].id : null
@@ -53,7 +53,7 @@ export default {
       users: 'getUsers'
     }),
     user () {
-      return this.users.find((u) => u.username === this.username)
+      return this.users.find((u) => u.username === this.username) || {}
     }
   }
 }

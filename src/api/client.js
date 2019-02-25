@@ -11,7 +11,6 @@ client.interceptors.request.use(function (config) {
   }
   return config
 }, function (error) {
-  // Do something with request error
   return Promise.reject(error)
 })
 
@@ -21,7 +20,6 @@ client.interceptors.response.use(function (response) {
   }
   return response
 }, function (error) {
-  // Do something with response error
   return Promise.reject(error)
 })
 

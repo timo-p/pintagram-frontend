@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import VueSelect from 'vue-cool-select'
-import { getUser } from './api/user'
+import { getUser } from './api'
 
 Vue.config.productionTip = false
 

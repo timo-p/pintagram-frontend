@@ -37,7 +37,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
-import { register } from '../api/user'
+import { register } from '../api'
 export default {
   name: 'Register',
   data: () => ({

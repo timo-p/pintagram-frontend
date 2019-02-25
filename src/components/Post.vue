@@ -15,7 +15,7 @@
 <script>
 import { distanceInWords } from 'date-fns'
 import { mapMutations, mapGetters } from 'vuex'
-import { deletePost } from '../api/user'
+import { deletePost } from '../api'
 export default {
   name: 'Post',
   props: ['post'],

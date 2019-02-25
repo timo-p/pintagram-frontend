@@ -1,4 +1,4 @@
-import { getLines } from '../../api/user'
+import { getLines } from '../../api'
 
 const state = {
   lines: []

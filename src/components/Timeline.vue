@@ -18,7 +18,7 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
 import Post from './Post'
 import CreatePost from './CreatePost'
-import { getTimeline } from '../api/user'
+import { getTimeline } from '../api'
 
 export default {
   name: 'Timeline',

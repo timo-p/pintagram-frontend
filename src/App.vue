@@ -7,9 +7,9 @@
           <router-link class="nav-item nav-link" to="/">Home</router-link>
           <router-link class="nav-item nav-link" to="/top-users">Top users</router-link>
           <router-link v-if="!user.username" class="nav-item nav-link" to="/register">Register</router-link>
-          <b-nav-item-dropdown right v-if="!user.username">
+          <b-nav-item-dropdown ref="ddown" right v-if="!user.username">
             <template slot="button-content"><em>Login</em></template>
-            <Login></Login>
+            <Login :onLogin="closeDropdown"></Login>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown right v-else>
             <template slot="button-content"><em>{{ user.first_name }} {{ user.last_name }}</em></template>
@@ -50,6 +50,9 @@ export default {
       this.setUser({})
       this.setFollowings([])
       this.$router.push('/')
+    },
+    closeDropdown () {
+      this.$refs.ddown.hide(true)
     }
   },
   computed: {

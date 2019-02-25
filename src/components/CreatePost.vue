@@ -21,7 +21,7 @@
 <script>
 import { CoolSelect } from 'vue-cool-select'
 import { mapGetters, mapMutations } from 'vuex'
-import { createPost } from '../api/user'
+import { createPost } from '../api'
 export default {
   name: 'CreatePost',
   components: {

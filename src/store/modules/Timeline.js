@@ -1,4 +1,4 @@
-import { getTimeline } from '../../api/user'
+import { getTimeline } from '../../api'
 import { compareDesc } from 'date-fns'
 
 const sortTimeline = (timeline) => timeline.sort((a, b) => compareDesc(new Date(a.created_at), new Date(b.created_at)))

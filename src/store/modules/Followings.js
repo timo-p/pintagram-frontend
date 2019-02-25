@@ -1,4 +1,4 @@
-import { getFollowings, follow, unfollow } from '../../api/user'
+import { getFollowings } from '../../api'
 
 const state = {
   followings: []
@@ -33,18 +33,6 @@ const actions = {
     getFollowings(username)
       .then((response) => {
         commit('setFollowings', response.data)
-      })
-  },
-  follow ({ commit }, username) {
-    follow({ follow: username })
-      .then((response) => {
-        commit('addFollowing', response.data)
-      })
-  },
-  unfollow ({ commit }, username) {
-    unfollow({ follow: username })
-      .then(() => {
-        commit('removeFollowing', username)
       })
   }
 }

@@ -1,4 +1,4 @@
-import { getTopUsers, getUserByUsername } from '../../api/user'
+import { getUserByUsername } from '../../api'
 
 const state = {
   users: []
@@ -7,9 +7,6 @@ const state = {
 const getters = {
   getUsers (state) {
     return state.users
-  },
-  getUserByUsername (state, username) {
-    return state.users.find((u) => u.username === username)
   }
 }
 
@@ -24,12 +21,6 @@ const mutations = {
 }
 
 const actions = {
-  loadUsers ({ commit }) {
-    getTopUsers()
-      .then((response) => {
-        commit('setUsers', response.data)
-      })
-  },
   loadUserIfMissing ({ commit, state }, username) {
     if (!state.users.find((u) => u.username === username)) {
       getUserByUsername(username)

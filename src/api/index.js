@@ -47,4 +47,5 @@ export const getTimeline = (lastPostId) => {
   }
   return client.get('timeline', config)
 }
+
 export const getLines = () => client.get('lines')

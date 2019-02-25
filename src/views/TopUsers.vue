@@ -11,9 +11,9 @@
 
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { getTopUsers } from '../api/user'
-import FollowButton from './FollowButton'
+import { mapGetters, mapMutations } from 'vuex'
+import { getTopUsers } from '../api'
+import FollowButton from '../components/FollowButton'
 
 export default {
   components: { InfiniteLoading, FollowButton },
@@ -22,16 +22,9 @@ export default {
     this.setUsers([])
   },
   methods: {
-    ...mapActions(['loadUsers', 'follow', 'unfollow']),
     ...mapMutations(['addUsers', 'setUsers']),
-    canFollow (username) {
-      return this.user.username && this.user.username !== username && !this.followingUsernames.includes(username)
-    },
-    canUnfollow (username) {
-      return this.user.username && this.user.username !== username && this.followingUsernames.includes(username)
-    },
     name: (user) => `${user.first_name} ${user.last_name}`,
-    feedUrl: (user) => `/feed/${user.username}`,
+    feedUrl: (user) => `/user/${user.username}`,
     loadMore ($state) {
       const lastUsername = this.users.length ? this.users[this.users.length - 1].username : null
       getTopUsers(lastUsername)
