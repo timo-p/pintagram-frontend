@@ -1,0 +1,54 @@
+Parameters:
+  BucketName:
+    Type: String
+  Env:
+    Type: String
+  Aliases:
+    Type: CommaDelimitedList
+  AcmCertificateArn:
+    Type: String
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub
+        - ${BucketName}-${Env}
+        - { BucketName: !Ref BucketName, Env: !Ref Env }
+      WebsiteConfiguration:
+        IndexDocument: index.html
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: s3:GetObject
+            Resource: !Sub
+              - ${Arn}/*
+              - { Arn: !GetAtt S3Bucket.Arn }
+  CloudFront:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases: !Ref Aliases
+        ViewerCertificate:
+          AcmCertificateArn: !Ref AcmCertificateArn
+          SslSupportMethod: sni-only
+        Origins:
+          - DomainName: !GetAtt S3Bucket.DomainName
+            Id: !Sub
+              - S3-${Bucket}
+              - { Bucket: !Ref S3Bucket }
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+        DefaultRootObject: index.html
+        Enabled: true
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: !Sub
+            - S3-${Bucket}
+            - { Bucket: !Ref S3Bucket }
+          ViewerProtocolPolicy: "allow-all"

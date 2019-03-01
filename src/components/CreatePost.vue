@@ -58,4 +58,9 @@ export default {
 .IZ-select {
   width: 430px;
 }
+@media (max-width: 576px) {
+  .IZ-select {
+    width: 70%;
+  }
+}
 </style>

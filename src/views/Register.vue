@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 import { register } from '../api'
 export default {
   name: 'Register',
@@ -51,12 +51,14 @@ export default {
   },
   methods: {
     ...mapMutations(['setUser']),
+    ...mapActions(['loadLines']),
     register () {
       this.isRegistering = true
       register()
         .then((response) => {
           this.setUser(response.data)
           this.password = response.data.password
+          this.loadLines()
         })
     }
   }

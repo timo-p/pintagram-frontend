@@ -83,6 +83,12 @@ body {
   margin: 10px auto;
 }
 
+@media (max-width: 576px) {
+  .center {
+    width: 100%;
+  }
+}
+
 #nav {
   padding: 20px;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
