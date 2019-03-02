@@ -51,4 +51,4 @@ Resources:
           TargetOriginId: !Sub
             - S3-${Bucket}
             - { Bucket: !Ref S3Bucket }
-          ViewerProtocolPolicy: "allow-all"
+          ViewerProtocolPolicy: "redirect-to-https"
