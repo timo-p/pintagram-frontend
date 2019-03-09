@@ -15,8 +15,9 @@ const mutations = {
     state.users = users
   },
   addUsers (state, users) {
-    const newUsers = [].concat(state.users).concat(users)
-    state.users = newUsers
+    const existing = state.users.map((u) => u.username)
+    const newUsers = [].concat(users).filter((u) => !existing.includes(u.username))
+    state.users = [].concat(state.users).concat(newUsers)
   }
 }
 

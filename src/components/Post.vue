@@ -1,13 +1,16 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="font-weight-bolder">{{ post.first_name }} {{ post.last_name }}</span>
-      &nbsp;
-      <span class="font-weight-light">{{ time }} ago</span>
+      <div>
+        <span class="font-weight-bolder">{{ post.first_name }} {{ post.last_name }}</span>
+        &nbsp;
+        <span class="font-weight-light">{{ time }} ago</span>
+      </div>
+      <b-button variant="danger" size="sm" v-if="isOwnPost" @click="deleteThisPost()">Delete</b-button>
     </div>
     <div class="card-body">
       <p class="card-text">{{ post.message }}</p>
-      <button class="btn btn-danger" v-if="isOwnPost" @click="deleteThisPost()">Delete</button>
+      <LikeButton :post="post"></LikeButton>
     </div>
   </div>
 </template>
@@ -16,9 +19,11 @@
 import { distanceInWords } from 'date-fns'
 import { mapMutations, mapGetters } from 'vuex'
 import { deletePost } from '../api'
+import LikeButton from './LikeButton'
 export default {
   name: 'Post',
   props: ['post'],
+  components: { LikeButton },
   methods: {
     deleteThisPost () {
       deletePost(this.post.id)
@@ -42,6 +47,16 @@ export default {
 <style scoped>
   .card {
     transition: opacity .5s;
+    margin-top: 10px;
+  }
+
+  .card-header div {
+    margin-top: 4px;
+    float: left;
+  }
+
+  .card-header button {
+    float: right;
   }
 
   .v-leave-active {

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store'
 
 const client = axios.create({
   baseURL: process.env.VUE_APP_API_ROOT
@@ -20,6 +21,7 @@ client.interceptors.response.use(function (response) {
   }
   return response
 }, function (error) {
+  store.commit('addError', error.message)
   return Promise.reject(error)
 })
 

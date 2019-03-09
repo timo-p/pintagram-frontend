@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <ErrorWatcher/>
     <b-navbar :sticky="true" toggleable="sm" variant="light">
       <b-navbar-toggle target="nav_collapse" />
       <b-collapse is-nav id="nav_collapse">
@@ -40,9 +41,10 @@ import { mapMutations, mapGetters } from 'vuex'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Login from './components/Login'
+import ErrorWatcher from './components/ErrorWatcher'
 
 export default {
-  components: { Login },
+  components: { Login, ErrorWatcher },
   methods: {
     ...mapMutations(['setUser', 'setFollowings']),
     logout () {

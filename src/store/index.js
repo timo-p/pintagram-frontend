@@ -5,6 +5,7 @@ import users from './modules/Users'
 import followings from './modules/Followings'
 import timeline from './modules/Timeline'
 import lines from './modules/Lines'
+import errors from './modules/Errors'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     users,
     followings,
     timeline,
-    lines
+    lines,
+    errors
   },
   strict: debug
 })

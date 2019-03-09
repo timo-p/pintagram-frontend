@@ -26,8 +26,8 @@ export default {
     name: (user) => `${user.first_name} ${user.last_name}`,
     feedUrl: (user) => `/user/${user.username}`,
     loadMore ($state) {
-      const lastUsername = this.users.length ? this.users[this.users.length - 1].username : null
-      getTopUsers(lastUsername)
+      const lastRanking = this.users.length ? this.users[this.users.length - 1].ranking : null
+      getTopUsers(lastRanking)
         .then((response) => {
           this.addUsers(response.data)
           if (response.data.length) {

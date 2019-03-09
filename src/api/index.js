@@ -48,4 +48,8 @@ export const getTimeline = (lastPostId) => {
   return client.get('timeline', config)
 }
 
+export const like = (postId) => client.post(`posts/${postId}/likes`)
+
+export const unlike = (postId) => client.delete(`posts/${postId}/likes`)
+
 export const getLines = () => client.get('lines')

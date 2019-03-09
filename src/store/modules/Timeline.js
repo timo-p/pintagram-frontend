@@ -27,6 +27,11 @@ const mutations = {
   },
   deletePost (state, id) {
     state.timeline = state.timeline.filter((p) => p.id !== id)
+  },
+  updatePost (state, post) {
+    const timeline = [post].concat(state.timeline.filter((p) => p.id !== post.id))
+    sortTimeline(timeline)
+    state.timeline = timeline
   }
 }
 
