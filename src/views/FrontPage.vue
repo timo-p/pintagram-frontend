@@ -6,12 +6,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Timeline from '../components/Timeline'
 import Home from './Home'
 
 export default {
   components: { Timeline, Home },
+  destroyed () {
+    this.setTimeline([])
+  },
+  beforeRouteLeave (to, from, next) {
+    this.setTimeline([])
+    next()
+  },
+  methods: {
+    ...mapMutations(['setTimeline'])
+  },
   computed: {
     ...mapGetters({
       user: 'getUser'

@@ -31,6 +31,10 @@ export default {
   created () {
     this.loadUserIfMissing(this.username)
   },
+  beforeRouteLeave (to, from, next) {
+    this.setTimeline([])
+    next()
+  },
   methods: {
     ...mapActions(['loadUserIfMissing']),
     ...mapMutations(['addPostsToTimeline', 'setTimeline']),
