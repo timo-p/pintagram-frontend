@@ -1,4 +1,5 @@
-# pintagram-frontend
+# Frontend for Pintagram
+http://www.pintagram.club/
 
 ## Project setup
 ```
@@ -26,4 +27,4 @@ npm run lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Edit **.env** or add **.env.dev** etc.
